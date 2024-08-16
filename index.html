@@ -1,12 +1,17 @@
 <!DOCTYPE html>  
-<html lang="en">  
+<html lang="vi">  
 <head>  
   <meta charset="UTF-8">  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>IoT Dashboard</title>  
+  <title>Hệ Thống Giám Sát và Điều Khiển</title>  
   <style>  
     body {  
       font-family: Arial, sans-serif;  
+      margin: 0;  
+      display: flex;  
+      flex-direction: column;  
+      height: 100vh;  
+      background-color: #f0f0f0;  
     }  
     .header {  
       background-color: #f8f9fa;  
@@ -49,6 +54,44 @@
     .open {  
       width: 250px;  
     }  
+    .container {  
+      display: flex;  
+      justify-content: flex-end;  
+      flex: 1;  
+      align-items: center;  
+    }  
+    .main {  
+      text-align: center;  
+      width: 200px;  
+      margin-right: 20px;  
+    }  
+    .button {  
+      padding: 15px 30px;  
+      font-size: 20px;  
+      color: white;  
+      background-color: blue;  
+      border: none;  
+      border-radius: 5px;  
+      cursor: pointer;  
+      margin: 10px 0;  
+    }  
+    .led {  
+      margin-top: 20px;  
+      width: 100px;  
+      height: 100px;  
+      border: 2px solid #ccc;  
+      border-radius: 50%;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      background-color: white;  
+    }  
+    .led-on {  
+      background-color: yellow;  
+    }  
+    .led-off {  
+      background-color: white;  
+    }  
   </style>  
 </head>  
 <body>  
@@ -63,6 +106,17 @@
     <a href="data-sensor.html" onclick="closeMenu()">Data Sensor</a>  
   </div>  
 
+  <div class="container">  
+    <div class="main">  
+      <h2>LED</h2>  
+      <button class="button" onclick="toggleLight('on')">ON</button>  
+      <button class="button" onclick="toggleLight('off')">OFF</button>  
+      <div id="led" class="led led-off">  
+        <img src="https://img.icons8.com/ios-filled/50/000000/light-on.png" alt="LED" />  
+      </div>  
+    </div>  
+  </div>  
+
   <script>  
     function toggleMenu() {  
       var sidebar = document.getElementById("sidebar");  
@@ -72,6 +126,15 @@
     function closeMenu() {  
       var sidebar = document.getElementById("sidebar");  
       sidebar.classList.remove("open");  
+    }  
+
+    function toggleLight(state) {  
+      var led = document.getElementById("led");  
+      if (state === 'on') {  
+        led.className = 'led led-on';  
+      } else {  
+        led.className = 'led led-off';  
+      }  
     }  
   </script>  
 </body>  
