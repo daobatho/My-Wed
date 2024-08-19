@@ -1,141 +1,68 @@
-<!DOCTYPE html>  
-<html lang="vi">  
-<head>  
-  <meta charset="UTF-8">  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-  <title>Hệ Thống Giám Sát và Điều Khiển</title>  
-  <style>  
-    body {  
-      font-family: Arial, sans-serif;  
-      margin: 0;  
-      display: flex;  
-      flex-direction: column;  
-      height: 100vh;  
-      background-color: #f0f0f0;  
-    }  
-    .header {  
-      background-color: #f8f9fa;  
-      padding: 10px;  
-      text-align: center;  
-      font-size: 24px;  
-    }  
-    .menu-btn {  
-      font-size: 30px;  
-      cursor: pointer;  
-      position: absolute;  
-      top: 10px;  
-      left: 10px;  
-      padding: 10px;  
-      border: 1px solid black;  
-    }  
-    .sidebar {  
-      height: 100%;  
-      width: 0;  
-      position: fixed;  
-      top: 0;  
-      left: 0;  
-      background-color: #4CAF50;  
-      overflow-x: hidden;  
-      transition: 0.5s;  
-      padding-top: 60px;  
-    }  
-    .sidebar a {  
-      padding: 10px 15px;  
-      text-decoration: none;  
-      font-size: 25px;  
-      color: white;  
-      display: block;  
-      transition: 0.3s;  
-    }  
-    .sidebar a:hover {  
-      background-color: #ddd;  
-      color: black;  
-    }  
-    .open {  
-      width: 250px;  
-    }  
-    .container {  
-      display: flex;  
-      justify-content: flex-end;  
-      flex: 1;  
-      align-items: center;  
-    }  
-    .main {  
-      text-align: center;  
-      width: 200px;  
-      margin-right: 20px;  
-    }  
-    .button {  
-      padding: 15px 30px;  
-      font-size: 20px;  
-      color: white;  
-      background-color: blue;  
-      border: none;  
-      border-radius: 5px;  
-      cursor: pointer;  
-      margin: 10px 0;  
-    }  
-    .led {  
-      margin-top: 20px;  
-      width: 100px;  
-      height: 100px;  
-      border: 2px solid #ccc;  
-      border-radius: 50%;  
-      display: flex;  
-      align-items: center;  
-      justify-content: center;  
-      background-color: white;  
-    }  
-    .led-on {  
-      background-color: yellow;  
-    }  
-    .led-off {  
-      background-color: white;  
-    }  
-  </style>  
-</head>  
-<body>  
-  <div class="header">  
-    Hệ Thống Giám Sát và Điều Khiển  
-  </div>  
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard with Temperature and Humidity</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #00c3ff 0%, #1cefff 100%);
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Di chuyển lên trên */
+        }
 
-  <span class="menu-btn" onclick="toggleMenu()">&#9776;</span>  
+        .dashboard-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 50px; /* Khoảng cách từ trên xuống */
+            margin-right: 180px;
+        }
 
-  <div id="sidebar" class="sidebar">  
-    <a href="#" onclick="closeMenu()">Home</a>  
-    <a href="data-sensor.html" onclick="closeMenu()">Data Sensor</a>  
-  </div>  
+        .info-box {
+            width: 200px;
+            padding: 10px; /* Sửa lại từ 10x thành 10px */
+            background-color: #007bff;
+            border-radius: 8px;
+            color: white;
+            text-align: center;
+        }
 
-  <div class="container">  
-    <div class="main">  
-      <h2>LED</h2>  
-      <button class="button" onclick="toggleLight('on')">ON</button>  
-      <button class="button" onclick="toggleLight('off')">OFF</button>  
-      <div id="led" class="led led-off">  
-        <img src="https://img.icons8.com/ios-filled/50/000000/light-on.png" alt="LED" />  
-      </div>  
-    </div>  
-  </div>  
+        .info-box h2 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
 
-  <script>  
-    function toggleMenu() {  
-      var sidebar = document.getElementById("sidebar");  
-      sidebar.classList.toggle("open");  
-    }  
+        .info-box p {
+            margin: 10px 0 0;
+            font-size: 36px;
+            font-weight: bold;
+        }
 
-    function closeMenu() {  
-      var sidebar = document.getElementById("sidebar");  
-      sidebar.classList.remove("open");  
-    }  
+        .info-box.temp {
+            background-color: #17a2b8; /* Màu xanh nhạt */
+        }
 
-    function toggleLight(state) {  
-      var led = document.getElementById("led");  
-      if (state === 'on') {  
-        led.className = 'led led-on';  
-      } else {  
-        led.className = 'led led-off';  
-      }  
-    }  
-  </script>  
-</body>  
+        .info-box.humidity {
+            background-color: #28a745; /* Màu xanh lá cây */
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="info-box temp">
+            <h2>Nhiệt Độ</h2>
+            <p>25°C</p>
+        </div>
+        <div class="info-box humidity">
+            <h2>Độ Ẩm</h2>
+            <p>60%</p>
+        </div>
+    </div>
+</body>
 </html>
