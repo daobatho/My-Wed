@@ -114,15 +114,15 @@
         }
 
         .chart-container {
-            width: 80%; 
-            max-width: 800px; 
+            width: 100%; /* Đặt chiều rộng của container thành 100% để dễ căn giữa */
+            max-width: 800px; /* Giữ nguyên giá trị này */
             max-height: 500px;
-            margin-top: 80px; 
-            align-self: flex-start; 
-            display: flex; /* Sử dụng Flexbox để căn giữa đồ thị */
+            margin-top: 80px;
+            display: flex;
             justify-content: center; /* Căn giữa đồ thị theo chiều ngang */
             align-items: center; /* Căn giữa đồ thị theo chiều dọc nếu cần */
         }
+
 
         canvas {
             background: #ffffff; 
