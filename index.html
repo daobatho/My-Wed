@@ -13,9 +13,53 @@
             background: linear-gradient(135deg, #00c3ff 0%, #1cefff 100%); 
             font-family: 'Open Sans', sans-serif; 
             display: flex;
+            flex-direction: row; /* Sắp xếp các phần tử theo hàng ngang */
+
+        }
+
+        nav {
+            width: 70px; /* Chiều rộng của thanh điều hướng */
+            background-color: #333; /* Màu nền của thanh điều hướng */
+            color: white; 
+            padding: 15px; 
+            height: 100vh; /* Đặt chiều cao bằng chiều cao của cửa sổ */
+            position: fixed; /* Đặt thanh điều hướng cố định bên trái */
+            left: 0; /* Đặt thanh điều hướng bên trái của trang */
+            top: 0; 
+            display: flex;
             flex-direction: column;
-            justify-content: center; 
-            align-items: center; 
+            align-items: center;
+        }
+
+        nav ul {
+            list-style-type: none; 
+            padding: 0; 
+            margin: 0; 
+            width: 100%; /* Đặt chiều rộng của danh sách để có thể căn chỉnh */
+        }
+
+        nav ul li {
+            margin: 15px 0; 
+            text-align: center;
+        }
+
+        nav ul li a {
+            color: white; 
+            text-decoration: none; 
+            font-size: 18px; 
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline; 
+        }
+
+        .content-container {
+            margin-left: 70px; /* Đặt khoảng cách lề bên trái để không bị che khuất bởi thanh điều hướng */
+            width: calc(100% - 70px); /* Đảm bảo nội dung chiếm toàn bộ chiều rộng còn lại */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
 
         .dashboard-container {
@@ -74,9 +118,10 @@
             max-width: 800px; 
             max-height: 500px;
             margin-top: 80px; 
-            margin-cent
-            /*margin-left: 150px; */
             align-self: flex-start; 
+            display: flex; /* Sử dụng Flexbox để căn giữa đồ thị */
+            justify-content: center; /* Căn giữa đồ thị theo chiều ngang */
+            align-items: center; /* Căn giữa đồ thị theo chiều dọc nếu cần */
         }
 
         canvas {
@@ -87,33 +132,37 @@
     </style>
 </head>
 <body>
-    <ul>
-        <li><a href="default.asp">Home</a></li>
-        <li><a href="news.asp">News</a></li>
-        <li><a href="contact.asp">Contact</a></li>
-        <li><a href="about.asp">About</a></li>
-      </ul>
-    <div class="dashboard-container">
-        <div class="info-box temp">
-            <h2>Nhiệt Độ</h2>
-            <p>25°C <i class="fas fa-thermometer-half"></i></p>
-        </div>
-        <div class="info-box humidity">
-            <h2>Độ Ẩm</h2>
-            <p>60% <i class="fas fa-tint"></i></p>
-        </div>
-        <div class="info-box led-on" onclick="toggleLED('on')">
-            <h2>LED ON</h2>
-            <p>✓</p>
-        </div>
-        <div class="info-box led-off" onclick="toggleLED('off')">
-            <h2>LED OFF</h2>
-            <p>✗</p>
-        </div>
-    </div>
+    <nav>
+        <ul>
+            <li><a href="file:///C:/Users/ThoDB/html_wed/index.html">Home</a></li>
+            <li><a href="news.asp">Hystori Action</a></li>
+            <li><a href="about.asp">About</a></li>
+        </ul>
+    </nav>
 
-    <div class="chart-container">
-        <canvas id="temperatureChart"></canvas>
+    <div class="content-container">
+        <div class="dashboard-container">
+            <div class="info-box temp">
+                <h2>Nhiệt Độ</h2>
+                <p>25°C <i class="fas fa-thermometer-half"></i></p>
+            </div>
+            <div class="info-box humidity">
+                <h2>Độ Ẩm</h2>
+                <p>60% <i class="fas fa-tint"></i></p>
+            </div>
+            <div class="info-box led-on" onclick="toggleLED('on')">
+                <h2>LED ON</h2>
+                <p>✓</p>
+            </div>
+            <div class="info-box led-off" onclick="toggleLED('off')">
+                <h2>LED OFF</h2>
+                <p>✗</p>
+            </div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="temperatureChart"></canvas>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
