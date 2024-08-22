@@ -1,86 +1,87 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard with Temperature and Humidity</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Dashboard with Temperature and Humidity</title> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
     <style>
         body {
-            margin: 0; /* Bỏ các khoảng trống mặc định của body */
-            padding: 0; /* Bỏ padding mặc định của body */
-            height: 100vh; /* Chiều cao của body là toàn màn hình */
-            background: linear-gradient(135deg, #00c3ff 0%, #1cefff 100%); /* Màu nền gradient */
-            font-family: 'Open Sans', sans-serif; /* Font chữ cho toàn bộ trang */
+            margin: 0; 
+            padding: 0; 
+            height: 100vh; 
+            background: linear-gradient(135deg, #00c3ff 0%, #1cefff 100%); 
+            font-family: 'Open Sans', sans-serif; 
             display: flex;
-            flex-direction: column; /* Hiển thị các phần tử theo cột */
-            justify-content: center; /* Căn giữa các phần tử theo chiều dọc */
-            align-items: center; /* Căn giữa các phần tử theo chiều ngang */
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
         }
 
         .dashboard-container {
-            display: flex; /* Hiển thị các ô thông tin theo hàng ngang */
-            gap: 50px; /* Khoảng cách giữa các ô thông tin */
-            margin-top: 50px; /* Khoảng cách phía trên các ô thông tin */
+            display: flex;
+            gap: 50px; 
+            margin-top: 50px; 
         }
 
         .info-box {
-            width: 200px; /* Chiều rộng của mỗi ô thông tin */
-            padding: 10px; /* Khoảng cách bên trong ô */
-            background-color: #007bff; /* Màu nền mặc định của ô */
-            border-radius: 8px; /* Bo tròn các góc của ô */
-            color: white; /* Màu chữ trắng */
-            text-align: center; /* Căn giữa chữ trong ô */
+            width: 200px; 
+            padding: 10px; 
+            background-color: #007bff; 
+            border-radius: 8px; 
+            color: white; 
+            text-align: center; 
+            cursor: pointer; /* Thay đổi con trỏ khi di chuột vào ô */
         }
 
         .info-box h2 {
-            margin: 0; /* Bỏ khoảng cách mặc định phía trên và dưới */
-            font-size: 18px; /* Kích thước font của tiêu đề */
-            font-weight: 600; /* Độ đậm của tiêu đề */
+            margin: 0; 
+            font-size: 18px; 
+            font-weight: 600; 
         }
 
         .info-box p {
-            margin: 10px 0 0; /* Khoảng cách trên dưới của phần chữ số */
-            font-size: 36px; /* Kích thước font của chữ số */
-            font-weight: bold; /* Chữ số in đậm */
-            display: flex; /* Sử dụng flexbox cho biểu tượng và giá trị */
-            justify-content: center; /* Căn giữa nội dung */
-            align-items: center; /* Căn giữa theo chiều dọc */
+            margin: 10px 0 0; 
+            font-size: 36px; 
+            font-weight: bold; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
         }
 
         .info-box p i {
-            margin-left: 10px; /* Khoảng cách giữa giá trị và biểu tượng */
+            margin-left: 10px; 
         }
 
         .info-box.temp {
-            background-color: #17a2b8; /* Màu nền của ô Nhiệt Độ */
+            background-color: #17a2b8; 
         }
 
         .info-box.humidity {
-            background-color: #28a745; /* Màu nền của ô Độ Ẩm */
+            background-color: #28a745; 
         }
 
         .info-box.led-on {
-            background-color: #ffc107; /* Màu nền của ô LED ON */
+            background-color: #ffc107; 
         }
 
         .info-box.led-off {
-            background-color: #6c757d; /* Màu nền của ô LED OFF */
+            background-color: #6c757d; 
         }
 
         .chart-container {
-            width: 80%; /* Chỉnh kích thước đồ thị */
-            max-width: 800px; /* Giới hạn chiều rộng tối đa của đồ thị */
+            width: 80%; 
+            max-width: 800px; 
             max-height: 500px;
-            margin-top: 80px; /* Cách các ô thông tin 80px */
-            margin-left: 150px; /* Cách lề trái 180px */
-            align-self: flex-start; /* Đặt đồ thị không căn giữa, mà căn theo lề trái của parent container */
+            margin-top: 80px; 
+            margin-left: 150px; 
+            align-self: flex-start; 
         }
 
         canvas {
-            background: #ffffff; /* Màu nền của đồ thị */
-            border-radius: 10px; /* Bo tròn các góc của đồ thị */
-            padding: 20px; /* Khoảng cách bên trong đồ thị */
+            background: #ffffff; 
+            border-radius: 10px; 
+            padding: 20px; 
         }
     </style>
 </head>
@@ -88,17 +89,17 @@
     <div class="dashboard-container">
         <div class="info-box temp">
             <h2>Nhiệt Độ</h2>
-            <p>25°C <i class="fas fa-thermometer-half"></i></p> <!-- Biểu tượng nhiệt kế bên phải giá trị -->
+            <p>25°C <i class="fas fa-thermometer-half"></i></p>
         </div>
         <div class="info-box humidity">
             <h2>Độ Ẩm</h2>
-            <p>60% <i class="fas fa-tint"></i></p> <!-- Biểu tượng giọt nước bên phải giá trị -->
+            <p>60% <i class="fas fa-tint"></i></p>
         </div>
-        <div class="info-box led-on">
+        <div class="info-box led-on" onclick="toggleLED('on')">
             <h2>LED ON</h2>
             <p>✓</p>
         </div>
-        <div class="info-box led-off">
+        <div class="info-box led-off" onclick="toggleLED('off')">
             <h2>LED OFF</h2>
             <p>✗</p>
         </div>
@@ -108,60 +109,61 @@
         <canvas id="temperatureChart"></canvas>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
     <script>
-        // Dữ liệu mẫu ban đầu cho đồ thị
-        const labels = ['00:00', '01:00', '02:00', '03:00', '04:00', '05:00', '06:00', '07:00', '08:00', '09:00', '10:00'];
+        const labels = ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00','22:00','24:00']; 
+
         const data = {
             labels: labels,
             datasets: [{
-                label: 'Nhiệt độ trong ngày', // Tiêu đề của đồ thị
-                backgroundColor: 'rgba(255, 255, 0, 0.2)', // Thay đổi màu nền của đường đồ thị thành vàng nhạt
-                borderColor: 'rgba(255, 255, 0, 1)', // Thay đổi màu viền của đường đồ thị thành vàng
-                data: [22, 21, 20, 19, 18, 17, 20, 22, 24, 26, 27], // Dữ liệu nhiệt độ
-                fill: false, // Không tô màu dưới đường đồ thị
-                tension: 0.1 // Độ cong của đường đồ thị
+                label: '', // Để trống để không hiển thị đường đồ thị
+                backgroundColor: '', // Không có màu nền
+                borderColor: '', // Không có màu viền
+                data: [] // Không có dữ liệu
             }]
         };
 
         const config = {
-            type: 'line', // Loại đồ thị là line chart
+            type: 'line',
             data: data,
             options: {
                 scales: {
                     x: {
                         title: {
                             display: true,
-                            text: 'Thời gian (giờ)' // Tiêu đề trục X
+                            text: 'Thời gian (giờ)'
                         }
-                        
                     },
                     y: {
                         title: {
                             display: true,
-                            text: 'Nhiệt độ (°C)' // Tiêu đề trục Y
-                        }
+                            text: 'Nhiệt độ (°C)'
+                        },
+                        min: 20,
+                        max: 38
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
                     }
                 }
             }
         };
 
-        // Khởi tạo đồ thị nhiệt độ với cấu hình trên
         const temperatureChart = new Chart(
             document.getElementById('temperatureChart'),
             config
         );
 
-        // Giả lập cập nhật dữ liệu mỗi giờ
-        setInterval(() => {
-            const currentHour = new Date().getHours(); // Lấy giờ hiện tại
-            labels.push(currentHour + ':00'); // Thêm giờ mới vào trục X
-            if (labels.length > 12) labels.shift(); // Giới hạn chỉ hiển thị 12 giờ gần nhất
-            const newTemperature = Math.floor(Math.random() * 10) + 20; // Sinh nhiệt độ ngẫu nhiên từ 20°C đến 29°C
-            data.datasets[0].data.push(newTemperature); // Thêm nhiệt độ mới vào dữ liệu
-            if (data.datasets[0].data.length > 12) data.datasets[0].data.shift(); // Giới hạn chỉ hiển thị 12 điểm dữ liệu
-            temperatureChart.update(); // Cập nhật lại đồ thị
-        }, 3600000); // Cập nhật mỗi giờ (3600000 ms = 1 giờ)
+        // Hàm bật/tắt LED
+        function toggleLED(state) {
+            if (state === 'on') {
+                alert("LED đang sáng");
+            } else if (state === 'off') {
+                alert("LED đã tắt");
+            }
+        }
     </script>
 </body>
 </html>
