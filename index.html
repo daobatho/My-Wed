@@ -1,176 +1,183 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="vi"> <!-- Đặt ngôn ngữ của trang web là tiếng Việt -->
 <head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>Dashboard with Temperature and Humidity</title> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <meta charset="UTF-8"> <!-- Đặt mã hóa ký tự là UTF-8 để hỗ trợ đa ngôn ngữ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Đảm bảo trang web hiển thị tốt trên các thiết bị di động -->
+    <title>Dashboard with Temperature and Humidity</title> <!-- Tiêu đề của trang web, hiển thị trên thanh tiêu đề của trình duyệt -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Liên kết đến tệp CSS của Font Awesome để sử dụng các biểu tượng -->
     <style>
         body {
-            margin: 0; 
-            padding: 0; 
-            height: 100vh; 
-            background: linear-gradient(135deg, #00c3ff 0%, #1cefff 100%); 
-            font-family: 'Open Sans', sans-serif; 
-            display: flex;
+            margin: 0; /* Loại bỏ khoảng cách mặc định của trình duyệt */
+            padding: 0; /* Loại bỏ khoảng đệm mặc định của trình duyệt */
+            height: 100vh; /* Đặt chiều cao của body bằng 100% chiều cao cửa sổ trình duyệt */
+            background: linear-gradient(135deg, #00c3ff 0%, #1cefff 100%); /* Nền của trang với gradient từ xanh dương sáng đến xanh dương đậm */
+            font-family: 'Open Sans', sans-serif; /* Đặt phông chữ của toàn bộ trang */
+            display: flex; /* Sử dụng Flexbox để sắp xếp các phần tử bên trong body */
             flex-direction: row; /* Sắp xếp các phần tử theo hàng ngang */
-
         }
 
         nav {
             width: 70px; /* Chiều rộng của thanh điều hướng */
             background-color: #333; /* Màu nền của thanh điều hướng */
-            color: white; 
-            padding: 15px; 
-            height: 100vh; /* Đặt chiều cao bằng chiều cao của cửa sổ */
-            position: fixed; /* Đặt thanh điều hướng cố định bên trái */
-            left: 0; /* Đặt thanh điều hướng bên trái của trang */
-            top: 0; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            color: white; /* Màu chữ trong thanh điều hướng */
+            padding: 15px; /* Padding bên trong thanh điều hướng */
+            height: 100vh; /* Chiều cao của thanh điều hướng bằng chiều cao cửa sổ trình duyệt */
+            position: fixed; /* Đặt thanh điều hướng ở vị trí cố định */
+            left: 0; /* Đặt thanh điều hướng ở cạnh trái của trang */
+            top: 0; /* Đặt thanh điều hướng ở cạnh trên của trang */
+            display: flex; /* Sử dụng Flexbox để sắp xếp các phần tử bên trong nav */
+            flex-direction: column; /* Sắp xếp các phần tử theo cột dọc */
+            align-items: center; /* Căn giữa các phần tử theo chiều ngang */
         }
 
         nav ul {
-            list-style-type: none; 
-            padding: 0; 
-            margin: 0; 
-            width: 100%; /* Đặt chiều rộng của danh sách để có thể căn chỉnh */
+            list-style-type: none; /* Loại bỏ dấu chấm của danh sách không thứ tự */
+            padding: 0; /* Loại bỏ khoảng đệm của danh sách */
+            margin: 0; /* Loại bỏ khoảng cách bên ngoài của danh sách */
+            width: 100%; /* Đặt chiều rộng của danh sách bằng với chiều rộng của thanh điều hướng */
         }
 
         nav ul li {
-            margin: 15px 0; 
-            text-align: center;
+            margin: 15px 0; /* Khoảng cách trên và dưới của mỗi mục trong danh sách */
+            text-align: center; /* Căn giữa văn bản trong các mục danh sách */
         }
 
         nav ul li a {
-            color: white; 
-            text-decoration: none; 
-            font-size: 18px; 
+            color: white; /* Màu chữ của các liên kết trong thanh điều hướng */
+            text-decoration: none; /* Loại bỏ gạch chân của liên kết */
+            font-size: 18px; /* Kích thước chữ của các liên kết */
         }
 
         nav ul li a:hover {
-            text-decoration: underline; 
+            text-decoration: underline; /* Thêm gạch chân khi di chuột qua liên kết */
         }
 
         .content-container {
-            margin-left: 70px; /* Đặt khoảng cách lề bên trái để không bị che khuất bởi thanh điều hướng */
-            width: calc(100% - 70px); /* Đảm bảo nội dung chiếm toàn bộ chiều rộng còn lại */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
+            margin-left: 70px; /* Đặt khoảng cách bên trái của nội dung để không bị che khuất bởi thanh điều hướng */
+            width: calc(100% - 70px); /* Đặt chiều rộng nội dung bằng với chiều rộng của trang trừ đi chiều rộng của thanh điều hướng */
+            display: flex; /* Sử dụng Flexbox để sắp xếp các phần tử bên trong nội dung */
+            flex-direction: column; /* Sắp xếp các phần tử theo cột dọc */
+            align-items: center; /* Căn giữa các phần tử theo chiều ngang */
+            padding: 20px; /* Padding bên trong nội dung */
         }
 
         .dashboard-container {
-            display: flex;
-            gap: 50px; 
-            margin-top: 50px; 
+            display: flex; /* Sử dụng Flexbox để sắp xếp các phần tử bên trong dashboard-container */
+            gap: 50px; /* Khoảng cách giữa các khối thông tin */
+            margin-top: 50px; /* Khoảng cách từ trên cùng của nội dung */
         }
 
         .info-box {
-            width: 200px; 
-            padding: 10px; 
-            background-color: #007bff; 
-            border-radius: 8px; 
-            color: white; 
-            text-align: center; 
-            cursor: pointer; /* Thay đổi con trỏ khi di chuột vào ô */
+            width: 200px; /* Chiều rộng của mỗi khối thông tin */
+            padding: 10px; /* Padding bên trong mỗi khối thông tin */
+            background-color: #007bff; /* Màu nền của khối thông tin */
+            border-radius: 8px; /* Bo tròn các góc của khối thông tin */
+            color: white; /* Màu chữ trong khối thông tin */
+            text-align: center; /* Căn giữa văn bản trong khối thông tin */
+            cursor: pointer; /* Thay đổi con trỏ khi di chuột qua khối thông tin */
         }
 
         .info-box h2 {
-            margin: 0; 
-            font-size: 18px; 
-            font-weight: 600; 
+            margin: 0; /* Loại bỏ khoảng cách trên và dưới của tiêu đề */
+            font-size: 18px; /* Kích thước chữ của tiêu đề */
+            font-weight: 600; /* Đặt độ đậm của chữ tiêu đề */
         }
 
         .info-box p {
-            margin: 10px 0 0; 
-            font-size: 36px; 
-            font-weight: bold; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
+            margin: 10px 0 0; /* Khoảng cách trên của văn bản chính trong khối thông tin */
+            font-size: 36px; /* Kích thước chữ của văn bản chính */
+            font-weight: bold; /* Đặt độ đậm của chữ văn bản chính */
+            display: flex; /* Sử dụng Flexbox để sắp xếp các phần tử bên trong văn bản chính */
+            justify-content: center; /* Căn giữa các phần tử theo chiều ngang */
+            align-items: center; /* Căn giữa các phần tử theo chiều dọc */
         }
 
         .info-box p i {
-            margin-left: 10px; 
+            margin-left: 10px; /* Khoảng cách giữa văn bản chính và biểu tượng */
         }
 
         .info-box.temp {
-            background-color: #17a2b8; 
+            background-color: #17a2b8; /* Màu nền của khối thông tin nhiệt độ */
         }
 
         .info-box.humidity {
-            background-color: #28a745; 
+            background-color: #28a745; /* Màu nền của khối thông tin độ ẩm */
+        }
+
+        .info-box.light {
+            background-color: #ff851b; /* Màu nền của khối thông tin độ sáng */
         }
 
         .info-box.led-on {
-            background-color: #ffc107; 
+            background-color: #ffc107; /* Màu nền của khối thông tin LED ON */
         }
 
         .info-box.led-off {
-            background-color: #6c757d; 
+            background-color: #6c757d; /* Màu nền của khối thông tin LED OFF */
         }
 
         .chart-container {
-            width: 100%; /* Đặt chiều rộng của container thành 100% để dễ căn giữa */
-            max-width: 800px; /* Giữ nguyên giá trị này */
-            max-height: 500px;
-            margin-top: 80px;
-            display: flex;
+            width: 100%; /* Đặt chiều rộng của container đồ thị thành 100% */
+            max-width: 800px; /* Giới hạn chiều rộng tối đa của container đồ thị */
+            max-height: 500px; /* Giới hạn chiều cao tối đa của container đồ thị */
+            margin-top: 80px; /* Khoảng cách từ trên cùng của nội dung */
+            display: flex; /* Sử dụng Flexbox để căn giữa đồ thị */
             justify-content: center; /* Căn giữa đồ thị theo chiều ngang */
-            align-items: center; /* Căn giữa đồ thị theo chiều dọc nếu cần */
+            align-items: center; /* Căn giữa đồ thị theo chiều dọc */
         }
 
-
         canvas {
-            background: #ffffff; 
-            border-radius: 10px; 
-            padding: 20px; 
+            background: #ffffff; /* Màu nền của đồ thị */
+            border-radius: 10px; /* Bo tròn các góc của đồ thị */
+            padding: 20px; /* Padding bên trong đồ thị */
         }
     </style>
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="file:///C:/Users/ThoDB/html_wed/index.html">Home</a></li>
-            <li><a href="news.asp">Hystori Action</a></li>
-            <li><a href="about.asp">About</a></li>
+            <li><a href="file:///C:/Users/ThoDB/html_wed/index.html">Home</a></li> <!-- Liên kết đến trang chính -->
+            <li><a href="news.asp">Hystori Action</a></li> <!-- Liên kết đến trang Hystori Action -->
+            <li><a href="about.asp">About</a></li> <!-- Liên kết đến trang About -->
         </ul>
     </nav>
 
     <div class="content-container">
         <div class="dashboard-container">
             <div class="info-box temp">
-                <h2>Nhiệt Độ</h2>
-                <p>25°C <i class="fas fa-thermometer-half"></i></p>
+                <h2>Nhiệt Độ</h2> <!-- Tiêu đề của khối thông tin nhiệt độ -->
+                <p>25°C <i class="fas fa-thermometer-half"></i></p> <!-- Văn bản chính của khối thông tin nhiệt độ và biểu tượng -->
             </div>
             <div class="info-box humidity">
-                <h2>Độ Ẩm</h2>
-                <p>60% <i class="fas fa-tint"></i></p>
+                <h2>Độ Ẩm</h2> <!-- Tiêu đề của khối thông tin độ ẩm -->
+                <p>60% <i class="fas fa-tint"></i></p> <!-- Văn bản chính của khối thông tin độ ẩm và biểu tượng -->
+            </div>
+            <div class="info-box light">
+                <h2>Độ Sáng</h2> <!-- Tiêu đề của khối thông tin độ sáng -->
+                <p>80% <i class="fas fa-sun"></i></p> <!-- Văn bản chính của khối thông tin độ sáng và biểu tượng -->
             </div>
             <div class="info-box led-on" onclick="toggleLED('on')">
-                <h2>LED ON</h2>
-                <p>✓</p>
+                <h2>LED ON</h2> <!-- Tiêu đề của khối thông tin LED ON -->
+                <p>✓</p> <!-- Văn bản chính của khối thông tin LED ON -->
             </div>
             <div class="info-box led-off" onclick="toggleLED('off')">
-                <h2>LED OFF</h2>
-                <p>✗</p>
+                <h2>LED OFF</h2> <!-- Tiêu đề của khối thông tin LED OFF -->
+                <p>✗</p> <!-- Văn bản chính của khối thông tin LED OFF -->
             </div>
         </div>
 
         <div class="chart-container">
-            <canvas id="temperatureChart"></canvas>
+            <canvas id="temperatureChart"></canvas> <!-- Khung vẽ đồ thị nhiệt độ -->
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Liên kết đến thư viện Chart.js để vẽ đồ thị -->
     <script>
         const labels = ['00:00', '02:00', '04:00', '06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00','22:00','24:00']; 
+        // Mảng nhãn cho trục X của đồ thị, đại diện cho thời gian
 
         const data = {
-            labels: labels,
+            labels: labels, // Gán mảng nhãn vào dữ liệu đồ thị
             datasets: [{
                 label: '', // Để trống để không hiển thị đường đồ thị
                 backgroundColor: '', // Không có màu nền
@@ -180,28 +187,28 @@
         };
 
         const config = {
-            type: 'line',
-            data: data,
+            type: 'line', // Loại đồ thị là đồ thị đường
+            data: data, // Gán dữ liệu cho đồ thị
             options: {
                 scales: {
                     x: {
                         title: {
                             display: true,
-                            text: 'Thời gian (giờ)'
+                            text: 'Thời gian (giờ)' // Tiêu đề cho trục X
                         }
                     },
                     y: {
                         title: {
                             display: true,
-                            text: 'Nhiệt độ (°C)'
+                            text: 'Nhiệt độ (°C)' // Tiêu đề cho trục Y
                         },
-                        min: 20,
-                        max: 38
+                        min: 20, // Giá trị tối thiểu của trục Y
+                        max: 38 // Giá trị tối đa của trục Y
                     }
                 },
                 plugins: {
                     legend: {
-                        display: false
+                        display: false // Ẩn chú thích
                     }
                 }
             }
@@ -210,14 +217,14 @@
         const temperatureChart = new Chart(
             document.getElementById('temperatureChart'),
             config
-        );
+        ); // Khởi tạo đối tượng Chart với cấu hình đã định nghĩa
 
         // Hàm bật/tắt LED
         function toggleLED(state) {
             if (state === 'on') {
-                alert("LED đang sáng");
+                alert("LED đang sáng"); // Hiển thị thông báo khi LED đang sáng
             } else if (state === 'off') {
-                alert("LED đã tắt");
+                alert("LED đã tắt"); // Hiển thị thông báo khi LED đã tắt
             }
         }
     </script>
